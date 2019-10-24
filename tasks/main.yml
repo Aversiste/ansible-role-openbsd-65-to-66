@@ -1,0 +1,42 @@
+---
+- name: Remove files no longer included in the current release of perl(1)
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ perl_files }}"
+
+- name: snmpctl(8) has been retired
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items: "{{ snmpctl_files }}"
+
+- name: Remove files associated with client use of the X Font Service
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ xfontservice_files }}"
+
+- name: xman(1) has been retired
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ xman_files }}"
+
+- name: Remove files associated with retired X11 drivers and man pages
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ x11drivers_files }}"
+
+- name: Remove retired include files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ retiredinclude_files }}"
+
+- name: Remove other retired man pages
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ retiredman_files }}"
